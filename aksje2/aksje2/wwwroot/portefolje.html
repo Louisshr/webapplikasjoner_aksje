@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    
+</head>
+<body>
+    <h2>Min Portefolje</h2>
+
+    <div class="output-portefolje"></div>
+
+    <script>let id = localStorage.getItem('data');
+
+        $(function () {
+            hentPortefolje();
+        })
+
+        function hentPortefolje() {
+            const url = "aksje/hentPortefolje?id=" + id;
+
+            $.get(url, function (portefolje) {
+                if (portefolje != null) {
+                    formaterPortefolje(portefolje);
+                }
+                else
+                {
+                    document.querySelector(".output-portefolje").innerHTML = "Det har oppstått en feil. Venligst prøv igjen senere";
+                }
+            })
+        }
+
+        function formaterPortefolje(portefolje) {
+            let ut = "<table class = 'table table-striped'>" +
+                "<tr>" +
+                "<th>Aksje</th><th>antall</th><th>posisjon</th>" +
+                "<tr>";
+
+            for (let objekt of portefolje) {
+                ut += "<tr>" +
+                    "<td>" + objekt.aksje.navn + "</td>" +
+                    "<td>" + objekt.antall + "</td>" +
+                    "<td>" + objekt.pris + " kr" + "</td>" +
+                    "<td> <a class='btn btn-danger' href=''>Selg</a></td>" +        // her må du legge til en link der linken har en id
+                    "</tr>"
+            }
+            ut += "</table>";
+            document.querySelector(".output-portefolje").innerHTML = ut;
+        }</script>
+</body>
+</html>
