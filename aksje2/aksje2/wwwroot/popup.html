@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    
+    <div class="modal fade" id="selg_popupBox" tabindex="-1" role="dialog" aria-labelledby="popupBox" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="popupBox">Selg</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table-borderless">
+                        <tbody>
+                            <tr>
+                                <td scope="col">Antall aksjer</td>
+                            </tr>
+                            <tr>
+                                <td><input type="number" id="typeNumber" class="form-control" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
+                    <button type="button" class="btn btn-danger" onclick="send()">Selg</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" data-toggle="modal" data-target="#selg_popupBox">KNAPP</button>
+
+    <script>
+        function send()
+        {
+            console.log("hei");
+        }
+    </script>
+
+</body>
+</html>

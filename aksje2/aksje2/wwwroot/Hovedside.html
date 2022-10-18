@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <section>
+        <nav class="navbar justify-content-center navbar-expand navbar-dark bg-dark">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Min side <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="aksjekurser.html">Aksjer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Min Profil</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+
+    <!-- div med klasse: bestilling-conainer, skal fjernes-->
+
+    <div class="selg-container">
+        <p class="selg-navn">Akjsenavn</p>
+        <p class="selg-kurs">Kurs</p>
+        <input id="selg-input-antall" type="text" />
+        <button id="selgKnapp">Selg</button>
+        <p id="selg-melding"></p>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="side_info col-3 p-4">
+                    <h4>Egenkapital (NOK)</h4>
+                    <span id="felt-for-saldo"></span>
+                </div>
+                <div class="col p-4">
+                    <button onclick="hentPortefolje()">HENT</button>
+                    <div class="col fakeimg">Graf</div>
+                    <h4 class="mt-3">Mine Aksjer</h4>
+                    <div class="portefolje-container">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Navn</th>
+                                    <th scope="col">Antall</th>
+                                    <th scope="col">Totalpris</th>
+                                    <th style="width: 150px" scope="col">Kjøp/Selg</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Kahoot</th>
+                                    <td>5</td>
+                                    <td>3 000 kr</td>
+                                    <td><button type="button" class="btn btn-success">Kjøp</button><button type="button" class="btn btn-danger">Selg</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">DNB</th>
+                                    <td>5</td>
+                                    <td>3 000 kr</td>
+                                    <td><button type="button" class="btn btn-success">Kjøp</button><button type="button" class="btn btn-danger">Selg</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Kahoot</th>
+                                    <td>5</td>
+                                    <td>3 000 kr</td>
+                                    <td><button type="button" class="btn btn-success">Kjøp</button><button type="button" class="btn btn-danger">Selg</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Aker BP</th>
+                                    <td>5</td>
+                                    <td>3 000 kr</td>
+                                    <td><button type="button" class="btn btn-success">Kjøp</button><button type="button" class="btn btn-danger">Selg</button></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Kahoot</th>
+                                    <td>5</td>
+                                    <td>3 000 kr</td>
+                                    <td><button type="button" class="btn btn-success">Kjøp</button><button type="button" class="btn btn-danger">Selg</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="modal fade" id="selg_popupBox" tabindex="-1" role="dialog" aria-labelledby="popupBox" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="popupBox">Selg</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td scope="col">Antall aksjer</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" id="typeNumber" class="form-control" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
+                        <button id="selg-knapp" type="button" class="btn btn-danger">Selg</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <section>
+        <!--
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Kjøp</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table-borderless">
+                        <tbody>
+                            <tr>
+                                <td scope="col">Antall aksjer</td>
+                            </tr>
+                            <tr>
+                                <td><input type="number" id="typeNumber" class="form-control" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
+                    <button type="button" class="btn btn-primary" onclick="send()">Kjøp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        -->
+    </section>
+
+    <script>let id = localStorage.getItem('data');
+
+        $(function () {
+            hentSaldo();
+            hentPortefolje();
+        })
+
+
+        function hentSaldo() {
+            const url = "aksje/hentSaldo?id=" + id;
+
+            $.get(url, function (saldo) {
+                if (saldo != -1) {
+                    document.getElementById("felt-for-saldo").innerHTML = saldo;
+                }
+                else {
+                    console.log("Det har oppstått en feil, saldo er ikke tilgjengelig");
+                }
+
+            })
+        }
+
+        function hentPortefolje() {
+            const url = "aksje/hentPortefolje?id=" + id;
+
+            $.get(url, function (portefolje) {
+
+                if (portefolje != null) {
+                    formaterPortefolje(portefolje);
+                }
+                else {
+                    console.log("Det har oppstått en feil. Venligst prøv igjen senere");
+                }
+            })
+        }
+
+        function formaterPortefolje(portefolje) {
+            let ut = "<table class='table'><thead class='thead-light'>" + "<tr>" +
+                "<th scope='col'>Navn</th>" +
+                "<th scope='col'>Antall</th>" +
+                "<th scope='col'>Verdi</th>" +
+                "<th style='width: 150px' scope = 'col'>selg</th>" +
+                "</tr></thead><tbody>";
+
+            for (let aksje of portefolje) {
+                ut += "<tr>" +
+                    "<th scope='row'>" + aksje.aksje.navn + "</th>" +
+                    "<td>" + aksje.antall + "</td>" +
+                    "<td>" + aksje.pris + " kr</td>" +
+                    "<td> <button class='btn btn-danger' data-toggle='modal' data-target='#selg_popupBox' onclick='selg(" + aksje.aksje.id + ")'>selg</button></td>" +
+                    "</tr>";
+
+                console.log(aksje.aksje.id);
+            }
+
+            ut += "</tbody></table>";
+            document.querySelector(".portefolje-container").innerHTML = ut;
+        }
+
+        function selg(id) {            
+            const url = "aksje/hentEn?id=" + id;
+
+            $.get(url, function (aksje) {
+                //informasjon skal kun opprettes hvis get kallet er suksessfullt
+                //kan hende at bestilling navn og kurs bør defineres utenfor en funksjon slik at man ikke trenger å hente de hver gang
+
+                document.getElementById("popupBox").innerHTML = "Selg " + "(" + aksje.navn + ")";
+                document.getElementById("selg-knapp").onclick = function () { fullforSalg(aksje.id, aksje.verdi, aksje.navn); }
+
+                
+
+    /*
+                document.querySelector(".selg-navn").innerHTML = aksje.navn;
+                document.querySelector(".selg-kurs").innerHTML = aksje.verdi + " kr";
+                document.getElementById("selgKnapp").onclick = function () { fullforSalg(aksje.id, aksje.verdi, aksje.navn); }
+
+                document.querySelector(".selg-container").style.display = "block";
+                let input = document.getElementById("selg-input-antall");
+                input.addEventListener('keydown', function () {
+                   // vis pris dynamisk når brukeren endrer hvor mange aksjer som skal selges.
+                   
+
+                }, false);
+                */
+            });
+            
+        }
+
+      
+        function fullforSalg(aksje_id, verdi, aksje_navn)
+        {
+            let input_antall = document.getElementById("typeNumber");
+            let antall = Number(input_antall.value);
+
+            if (isNaN(antall) || input_antall == '') {
+                console.log("Venligst oppgi et gyldig antall");
+            }            
+
+            let selg_objekt =
+            {
+                personId: id,
+                aksjeId: aksje_id,
+                antall: antall
+            }
+
+            $.post("aksje/selg", selg_objekt, function (OK)
+            {
+                if (OK) {
+                    console.log("Solgt: " + aksje_navn + ", verdi: " + verdi * antall);
+                    hentSaldo();
+                    hentPortefolje();
+                    console.log(OK);
+                }
+                else
+                {
+                    // midlertidig
+
+                    console.log("Selg: Det har oppstått en feil")
+                }
+            })
+           // post kall
+
+        }
+    </script>
+</body>
+</html>
